@@ -1,7 +1,7 @@
 import react from "react"
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import LoginPage from "./pages/LoginPage/LoginPage"
-import Dashboard from "./common/components/Dashboard/Dashbaord"
+import Dashboard from "./common/components/Dashboard/Dashboard"
 
 const App = () => {
   return <>
