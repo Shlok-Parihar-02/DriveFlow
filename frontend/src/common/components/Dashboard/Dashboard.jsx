@@ -2,10 +2,12 @@ import react, { useState, useEffect } from "react"
 import Navbar from "../Navbar/Navbar"
 import Footer from "../Footer/Footer"
 import CustomAccordion from "../../CustomAccordion/CustomAccordion"
+import CustomTab from "../../CustomTab/CustomTab"
 
 const Dashboard = () => {
     const [mode, setMode] = useState('user')
     const [userName, setUserName] = useState()
+    const [activeTab, setActiveTab] = useState('Home')
 
     const DriveFlowFAQs = [
         {
@@ -46,31 +48,57 @@ const Dashboard = () => {
     ]
 
     const carCardsData = () => {
-        
+
     }
 
     return (
         <div className="flex min-h-screen flex-col">
             <Navbar />
-            {mode === 'user' ? (<main className="flex-1 px-20">
-                <div className="bg-slate-50 h-[350px]" >
-                    <h1 className="text-4xl text-sky-600 font-bold font-serif">Welcome, {userName}</h1>
-                </div>
-                <div className="bg-blue-200 h-[500px]">
+            {mode === 'user' 
+            ? (
+            <CustomTab
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                TabValues={['Home', 'Cars', 'Tracks', 'FAQs']}
+            />
+            ) : mode === "employee" 
+                ? (
+                <CustomTab
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                     //common calendar for both of these roles admin emp. 
+                     // normal calendar for user. 
+                    TabValues={['Dashboard', 'Available Sessions', 'Inventory', 'History']}
+                />
+                ) : (
+                   <CustomTab
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                    TabValues={['Dashboard', 'Sessions', 'Inventory', 'History', 'Management']} // then management will have all the CRUDS, vehicle, Track, Employee. 
+                /> 
+                )
+
+            }
+            {mode === 'user' ? (<main className="flex-1 px-20 py-5">
+                {activeTab === 'Home' && <div className="bg-white h-[350px] flex gap-2" >
+                    <h1 className="text-4xl font-bold font-serif">Welcome, </h1>
+                    <h1 className="text-4xl text-sky-600 font-bold font-serif">{userName}</h1>
+                </div>}
+                {activeTab === 'Cars' && <div className="bg-blue-200 h-[500px]">
                     <h1>Available Cars</h1>
                     <div className="bg-sky-400 h-[350px] w-[350px] rounded-xl bg-sky-200">
                         <h1 className="text-white p-3"> x4 </h1>
                     </div>
                     {/* NOW FETCH CARS DETAILS FROM BACKEND AND MAP IT TO 4 CARDS */}
-                </div>
-                <div className="bg-slate-200 h-[500px]">
+                </div>}
+                {activeTab === 'Tracks' && <div className="bg-slate-200 h-[500px]">
                     <h1>Available Tracks showcase</h1>
                     <div className="bg-sky-400 h-[350px] w-[350px] rounded-xl bg-sky-200">
                         <h1 className="text-white p-3"> x4 </h1>
                     </div>
                     {/* NOW FETCH TRACK DETAILS FROM BACKEND AND MAP IT TO 4 CARDS */}
-                </div>
-                <div className="bg-slate-50 h-[500px] pt-10">
+                </div>}
+                {activeTab === 'FAQs' && <div className="bg-slate-50 h-[500px] pt-10">
                     <h1 className="text-4xl text-center font-bold">
                         Frequently Asked Questions
                     </h1>
@@ -78,7 +106,7 @@ const Dashboard = () => {
                         <CustomAccordion items={DriveFlowFAQs} />
                         <CustomAccordion items={genericFAQs} />
                     </div>
-                </div>
+                </div>}
             </main>) : mode === 'employee' ? (<section className="flex-1">
                 {/* employee dashboard +++++###################+++++++++++#------------------------------------------------------------------------------------=================================================================================================================================== */}
                 <div>

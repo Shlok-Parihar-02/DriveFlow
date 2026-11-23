@@ -28,7 +28,7 @@ const LoginPage = () => {
     const handleSubmit = async (event) => {
         event.preventDefault() // stop browser's default form submission
         try {
-            const res = await fetch(`${apiUrl}/api/users/createUser`, {
+            const res = await fetch(`${apiUrl}/api/users/user`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
