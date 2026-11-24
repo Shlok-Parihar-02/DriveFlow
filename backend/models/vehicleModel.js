@@ -111,6 +111,6 @@ const vehicleSchema = mongoose.Schema({
         required: true,
         enum: ["Track", "Garage", "Showroom", "Carwash"]
     },
-}, { timeStamps: true })
+}, { timestamps: true })
 
 module.exports = mongoose.model('vehicles', vehicleSchema)

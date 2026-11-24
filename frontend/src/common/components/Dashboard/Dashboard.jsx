@@ -3,6 +3,9 @@ import Navbar from "../Navbar/Navbar"
 import Footer from "../Footer/Footer"
 import CustomAccordion from "../../CustomAccordion/CustomAccordion"
 import CustomTab from "../../CustomTab/CustomTab"
+import CustomButton from "../../CustomButton/CustomButton"
+import CustomSelect from "../../CustomSelect/CustomSelect"
+import CustomCalendar from "../../CustomCalendar/CustomCalendar"
 
 const Dashboard = () => {
     const [mode, setMode] = useState('user')
@@ -51,39 +54,66 @@ const Dashboard = () => {
 
     }
 
+    const handleEventRegistration = () => {
+        return console.log("BUTTON WORKS>>!!!")
+    }
+
     return (
         <div className="flex min-h-screen flex-col">
             <Navbar />
-            {mode === 'user' 
-            ? (
-            <CustomTab
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                TabValues={['Home', 'Cars', 'Tracks', 'FAQs']}
-            />
-            ) : mode === "employee" 
+            {/* TABS */}
+            {mode === 'user'
                 ? (
-                <CustomTab
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
-                     //common calendar for both of these roles admin emp. 
-                     // normal calendar for user. 
-                    TabValues={['Dashboard', 'Available Sessions', 'Inventory', 'History']}
-                />
-                ) : (
-                   <CustomTab
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
-                    TabValues={['Dashboard', 'Sessions', 'Inventory', 'History', 'Management']} // then management will have all the CRUDS, vehicle, Track, Employee. 
-                /> 
-                )
+                    <CustomTab
+                        activeTab={activeTab}
+                        setActiveTab={setActiveTab}
+                        TabValues={['Home', 'Cars', 'Tracks', 'FAQs']}
+                    />
+                ) : mode === "employee"
+                    ? (
+                        <CustomTab
+                            activeTab={activeTab}
+                            setActiveTab={setActiveTab}
+                            //common calendar for both of these roles admin emp. 
+                            // normal calendar for user. 
+                            TabValues={['Dashboard', 'Available Sessions', 'Inventory', 'History']}
+                        />
+                    ) : (
+                        <CustomTab
+                            activeTab={activeTab}
+                            setActiveTab={setActiveTab}
+                            TabValues={['Dashboard', 'Sessions', 'Inventory', 'History', 'Management']} // then management will have all the CRUDS, vehicle, Track, Employee. 
+                        />
+                    )
 
             }
+            {/* TAB CONTENT */}
             {mode === 'user' ? (<main className="flex-1 px-20 py-5">
-                {activeTab === 'Home' && <div className="bg-white h-[350px] flex gap-2" >
-                    <h1 className="text-4xl font-bold font-serif">Welcome, </h1>
-                    <h1 className="text-4xl text-sky-600 font-bold font-serif">{userName}</h1>
-                </div>}
+                {activeTab === 'Home' && <div className="bg-white min-h-[350px] flex flex-col justify-between" >
+                    <div className="flex">
+                        <h1 className="text-4xl font-bold font-serif">Welcome, </h1>
+                        <h1 className="text-4xl text-sky-600 font-bold font-serif">{userName}</h1>
+                    </div>
+                    <div className="flex">
+                        <div className="flex gap-1 w-6/12 flex-col">
+                            <div className="flex flex-row my-2 gap-4">
+                                <CustomSelect label={"Select Vehicle"} options={['MudRunner 4x4', 'Dilétto GT', 'WorkHorse Ranger', 'Pinto 800']} />
+                                <CustomSelect label={"Select Track"} options={['', 'B', 'C']} />
+                            </div>
+                            <CustomCalendar label={"Schedule Session"} />
+                        </div>
+                        <div className="flex gap-1 w-6/12 flex-col bg-amber-300 relative">
+                            <div className=" w-6/12 bg-red-400">image here both of these to be made as carousels</div>
+                            <div className=" w-6/12 bg-blue-400">track here and fade in fade out animation keeps playing.</div>
+                            <p className="absolute bottom-0">Preview window.. whatever user selects will be shown here as a preview. finally this is how it should look. This will be info and text section [date : time] [vehicle selected] [track selected] </p>
+                        </div>
+                    </div>
+                    <div className="flex items-end justify-end">
+                        <CustomButton purpose="book" onClick={handleEventRegistration} />
+                    </div>
+                </div>
+
+                }
                 {activeTab === 'Cars' && <div className="bg-blue-200 h-[500px]">
                     <h1>Available Cars</h1>
                     <div className="bg-sky-400 h-[350px] w-[350px] rounded-xl bg-sky-200">
