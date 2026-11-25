@@ -226,7 +226,7 @@ const LoginPage = () => {
                         type="submit"
                         className="w-full rounded-lg bg-sky-600 px-4 py-3 font-medium text-white transition hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-sky-200"
                     >
-                        Sign in
+                        {mode === 'login' ? "Login" : "Sign in"}
                     </button>
 
                     <div className="justify-center flex gap-2">
