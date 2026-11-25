@@ -14,11 +14,12 @@ const getUser = async (req, res) => {
 }
 const createUser = async (req, res) => {
     try{
-        const {userName, userPassword} = req.body
+        const {userEmail, userPassword } = req.body
         const salt = await bcrypt.genSalt(6)
         const HASHPASS = await bcrypt.hash(userPassword, salt)
-        const result = await User.create({userName, userPassword : HASHPASS})
+        const result = await User.create({userEmail, userPassword : HASHPASS})
         res.status(201).json({message:"Account created successfully"})
+        console.info(result)
     } catch (e) {
         console.error("Error at createUser", e)
         res.status(500).json({message:"Internal Server Error, createUser", data: e})

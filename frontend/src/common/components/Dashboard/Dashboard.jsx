@@ -3,14 +3,15 @@ import Navbar from "../Navbar/Navbar"
 import Footer from "../Footer/Footer"
 import CustomAccordion from "../../CustomAccordion/CustomAccordion"
 import CustomTab from "../../CustomTab/CustomTab"
+import CustomTable from "../../CustomTable/CustomTable"
 import CustomButton from "../../CustomButton/CustomButton"
 import CustomSelect from "../../CustomSelect/CustomSelect"
 import CustomCalendar from "../../CustomCalendar/CustomCalendar"
 
 const Dashboard = () => {
-    const [mode, setMode] = useState('user')
+    const [mode, setMode] = useState('employee')
     const [userName, setUserName] = useState()
-    const [activeTab, setActiveTab] = useState('Home')
+    const [activeTab, setActiveTab] = useState('Home' || 'Dashboard')
 
     const DriveFlowFAQs = [
         {
@@ -76,7 +77,7 @@ const Dashboard = () => {
                             setActiveTab={setActiveTab}
                             //common calendar for both of these roles admin emp. 
                             // normal calendar for user. 
-                            TabValues={['Dashboard', 'Available Sessions', 'Inventory', 'History']}
+                            TabValues={['Dashboard', 'Assigned Sessions', 'Inventory', 'History']}
                         />
                     ) : (
                         <CustomTab
@@ -139,15 +140,71 @@ const Dashboard = () => {
                 </div>}
             </main>) : mode === 'employee' ? (<section className="flex-1">
                 {/* employee dashboard +++++###################+++++++++++#------------------------------------------------------------------------------------=================================================================================================================================== */}
-                <div>
-                    calendar is important enough to be shownhere
-                    free vehicles, free tracks, available appointments,
-                    attended customer history.
-                    we are thinking that emp will take an appoinment like in counseling portal instead of being selected for one. or being assigned by someone.
+                <div className="py-4 px-8 h-full flex flex-col">
+                    {activeTab === 'Dashboard' && <div className="flex flex-col gap-4">
+                        <div className="flex gap-3 justify-between">
+                            <div className="w-6/12 flex justify-center">
+                                <CustomCalendar />
+                            </div>
+                            <div className="w-6/12 flex flex-col justify-around py-5 bg-slate-50">
+                                <div className="flex justify-around h-4/12 bg-amber-100">
+                                    <div> my sessions </div>
+                                    <div> attendace this week</div>
+                                    <div>scheduled sessions</div>
+                                </div>
+                                <div className="flex justify-around h-4/12 bg-amber-800">
+                                    <CustomButton purpose="custom" /> {/*  */}
+                                    <CustomButton purpose="view more" />
+                                    <CustomButton purpose="book" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    {activeTab === 'Assigned Sessions' && <div className="flex flex-col gap-4">
+                        <div>
+                            inventory. show the available cars and tracks. 
+                            <ul>
+                                <ol>
+                                    Admin is integrated in the workflow
+                                </ol>
+                                <ol>
+                                    Employee doesnt need to have this functionality
+                                </ol>
+                                and finally we can then add the scheduled sessions with inapp notification? like you havebeen assigned a session. so thats another big thing we can add notifications.
+                            </ul>
+                        </div>
+                    </div>}
+                    
+                    {activeTab === 'Inventory' && <div className="flex h-full bg-blue-50 flex-col gap-4">
+                        {/* <div> */}
+                            inventory. show the available cars and tracks.
+                            all in 1 show
+                            <div className="flex w-full gap-2">
+                                <div className="bg-amber-200 h-half w-3/12">car 1</div>
+                                <div className="bg-amber-200 h-half w-3/12">car 2</div>
+                                <div className="bg-amber-200 h-half w-3/12">car 3</div>
+                                <div className="bg-amber-200 h-half w-3/12">car 4</div>
+                            </div>
+                            <div className="flex w-full gap-2">
+                                <div className="bg-red-200 h-half w-3/12">track 1</div>
+                                <div className="bg-red-200 h-half w-3/12">track 2</div>
+                                <div className="bg-red-200 h-half w-3/12">track 3</div>
+                                <div className="bg-red-200 h-half w-3/12">track 4</div>
+                            </div>
+                        {/* </div> */}
+                    </div>}
+                    {activeTab === 'History' && <div className="flex flex-col gap-4">
+                        show employee's session history table. 
+                        <CustomTable />
+                    </div>}
+
+
                 </div>
             </section>) : (<section className="flex-1">
                 {/* Admin Dashboard +++++###################+++++++++++#------------------------------------------------------------------------------------=================================================================================================================================== */}
-                <div>
+                <div className="py-4 px-8">
+                    <CustomCalendar />
                     finance management, employee management, calendar and customer history,
                     vehicle management, track maintainance schedule, calendar full view live details, options to add delete reschedule.
                 </div>

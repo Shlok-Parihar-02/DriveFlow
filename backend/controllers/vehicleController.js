@@ -47,4 +47,34 @@ const postVehicle = async (req, res) => {
     }
 }
 
+const putVehicle = async (req,res) => {
+    try {
+        const data = req.body
+        const result = await Vehicle.findByIdAndUpdate({data})
+
+        if (result) {
+            return res.status(200).json({message:"Updated successfully"})
+        } else {
+            return res.status(404).json({message:"Could not find record"})
+        }
+    } catch (e) {
+        res.status(500).json({message:"Internal Server Error"})
+        console.error("Internal Server Error at putVehicle", e)
+    }
+}
+
+const deleteVehicle = async (req, res) => {
+    try {
+        const result = await Vehicle.findByIdAndDelete(req.params.id)
+        if (result) {
+            return res.status(200).json({message:"Deleted Sucessfully"})
+        } else {
+            return res.status(404).json({message:"Failed to delete record"})
+        }
+    } catch (e) {
+        res.status(500).json({message:"Internal Server Error"})
+        console.error("Internal Server error at deleteVehicle", e)
+    }
+}
+
 module.exports = {getVehicle, postVehicle, putVehicle, deleteVehicle}
