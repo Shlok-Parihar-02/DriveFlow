@@ -4,14 +4,16 @@ import Footer from "../Footer/Footer"
 import CustomAccordion from "../../CustomAccordion/CustomAccordion"
 import CustomTab from "../../CustomTab/CustomTab"
 import CustomTable from "../../CustomTable/CustomTable"
+import CustomModal from "../../CustomModal/CustomModal"
 import CustomButton from "../../CustomButton/CustomButton"
 import CustomSelect from "../../CustomSelect/CustomSelect"
 import CustomCalendar from "../../CustomCalendar/CustomCalendar"
 
 const Dashboard = () => {
-    const [mode, setMode] = useState('employee')
+    const [mode, setMode] = useState('admin')
     const [userName, setUserName] = useState()
     const [activeTab, setActiveTab] = useState('Home' || 'Dashboard')
+    const [openModal, setOpenModal] = useState(false)
 
     const DriveFlowFAQs = [
         {
@@ -49,6 +51,77 @@ const Dashboard = () => {
             question: "Do I need a driving licence?",
             answer: "Yes. You must carry a valid driving licence and meet the dealership's eligibility requirements before taking a test drive."
         },
+    ]
+
+    const rowsData = ['A', 'B', 'C', 'D']
+    const columnsData = [
+        {
+            key: 1,
+            header: "Date",
+            render: () => (
+                <>
+                    <p>26</p>
+                </>
+            )
+        },
+        {
+            key: 1,
+            header: "Time",
+            render: () => (
+                <>
+                    <p>11:49AM</p>
+                </>
+            )
+        },
+        {
+            key: 1,
+            header: "customer name",
+            render: () => (
+                <>
+                    <p>Larry dummy Smith</p>
+                </>
+            )
+        },
+        {
+            key: 1,
+            header: "contact",
+            render: () => (
+                <>
+                    <p>+10 0934 2039</p>
+                </>
+            )
+        },
+        {
+            key: 1,
+            header: "session time",
+            render: () => (
+                <>
+                    <p>
+                        <b>
+                            From:
+                        </b>
+                        11:46AM
+                    </p>
+                    <p>
+                        <b>
+                            To:
+                        </b>
+                        12:30PM
+                    </p>
+
+                </>
+            )
+        },
+        {
+            key: 1,
+            header: " View more",
+            render: () => (
+                <>
+                    <CustomButton onClick={() => setOpenModal(true)} />
+                </>
+            )
+        },
+
     ]
 
     const carCardsData = () => {
@@ -163,7 +236,7 @@ const Dashboard = () => {
                     }
                     {activeTab === 'Assigned Sessions' && <div className="flex flex-col gap-4">
                         <div>
-                            inventory. show the available cars and tracks. 
+                            inventory. show the available cars and tracks.
                             <ul>
                                 <ol>
                                     Admin is integrated in the workflow
@@ -175,9 +248,9 @@ const Dashboard = () => {
                             </ul>
                         </div>
                     </div>}
-                    
+
                     {activeTab === 'Inventory' && <div className="flex h-full bg-blue-50 flex-col gap-4">
-                        {/* <div> */}
+                        <div>
                             inventory. show the available cars and tracks.
                             all in 1 show
                             <div className="flex w-full gap-2">
@@ -192,21 +265,77 @@ const Dashboard = () => {
                                 <div className="bg-red-200 h-half w-3/12">track 3</div>
                                 <div className="bg-red-200 h-half w-3/12">track 4</div>
                             </div>
-                        {/* </div> */}
+                        </div>
                     </div>}
-                    {activeTab === 'History' && <div className="flex flex-col gap-4">
-                        show employee's session history table. 
-                        <CustomTable />
+                    {activeTab === 'History' && <div className="flex flex-col gap-4 p-5">
+                        show employee's session history table.
+                        date | Time | customer name | contact |session time| View more opens modal with details
+                        <CustomTable rows={rowsData} columns={columnsData} />
+                        <CustomModal
+                            isOpen={openModal}
+                            onClose={() => setOpenModal(false)}
+                            title="Session details"
+                        />
                     </div>}
-
 
                 </div>
             </section>) : (<section className="flex-1">
                 {/* Admin Dashboard +++++###################+++++++++++#------------------------------------------------------------------------------------=================================================================================================================================== */}
                 <div className="py-4 px-8">
-                    <CustomCalendar />
-                    finance management, employee management, calendar and customer history,
-                    vehicle management, track maintainance schedule, calendar full view live details, options to add delete reschedule.
+                    {
+                        activeTab === "Dashboard" && <div className="flex gap-2 p-5">
+                            <div className="flex w-8/12">
+                                stats
+                                <div>
+                                    todays sessions
+                                </div>
+                                <div>
+                                    total sessions this month
+                                </div>
+                                <div>
+                                    Revenue and payment summary
+                                </div>
+                                <div>
+                                    Vehicle maintenance alerts
+                                </div>
+                                <div>
+                                    Recent bookings / cancellations
+                                </div>
+                            </div>
+                            <div className="w-4/12">
+                                <CustomCalendar />
+                            </div>
+                        </div>
+                    }
+                    {
+                        activeTab === 'Sessions' && <div>
+                            sessions table dashboard of all the sessions completed, maybe a piechart of completed scheduled and refunded show active reschedules
+                        </div>
+                    }
+                    {
+                        activeTab === "Inventory" && <div className="flex w-full">
+                            <div>
+                                car tracking table ||
+                                employee attendace table
+                            </div>
+                        </div>
+                    }
+                    {activeTab === 'History' && <div className="flex flex-col gap-4 p-5">
+                        show all employee's session history table.
+                        date | Time | customer name | contact |session time| View more opens modal with details
+                        <CustomTable rows={rowsData} columns={columnsData} />
+                        <CustomModal
+                            isOpen={openModal}
+                            onClose={() => setOpenModal(false)}
+                            title="Session details"
+                        />
+                    </div>}
+                    {
+                        activeTab === "Management" && <div>
+                            finance management, employee management, calendar and customer history,
+                            vehicle management, track maintainance schedule, calendar full view live details, options to add delete reschedule.
+                        </div>
+                    }
                 </div>
             </section>)
             }

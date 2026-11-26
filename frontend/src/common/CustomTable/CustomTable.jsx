@@ -81,7 +81,7 @@ const CustomTable = ({
                     </tbody>
                 </table>
             </div>
-            <div className="h-0.5 bg-gradient-to-r from-sky-100 via-sky-600 to-sky-100" />
+            <div className="h-0.5 bg-gradient-to-r from-sky-100 via-sky-400 to-sky-100" />
         </div>
     )
 }

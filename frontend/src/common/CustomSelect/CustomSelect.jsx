@@ -136,9 +136,8 @@ const CustomSelect = ({
                     aria-hidden="true"
                     viewBox="0 0 20 20"
                     fill="none"
-                    className={`size-4 shrink-0 text-slate-400 transition-transform duration-200 motion-reduce:transition-none ${
-                        isOpen ? "rotate-180" : ""
-                    }`}
+                    className={`size-4 shrink-0 text-slate-400 transition-transform duration-200 motion-reduce:transition-none ${isOpen ? "rotate-180" : ""
+                        }`}
                 >
                     <path d="m5 7.5 5 5 5-5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -149,11 +148,10 @@ const CustomSelect = ({
                 id={listboxId}
                 role="listbox"
                 aria-hidden={!isOpen}
-                className={`absolute z-20 mt-1.5 max-h-60 w-full origin-top overflow-y-auto rounded-lg border border-slate-200 bg-white p-1.5 shadow-lg shadow-slate-200/60 transition duration-150 ease-out motion-reduce:transition-none ${
-                    isOpen
+                className={`absolute z-20 mt-1.5 max-h-60 w-full origin-top overflow-y-auto rounded-lg border border-slate-200 bg-white p-1.5 shadow-lg shadow-slate-200/60 transition duration-150 ease-out motion-reduce:transition-none ${isOpen
                         ? "visible translate-y-0 scale-100 opacity-100"
                         : "invisible -translate-y-1 scale-[0.98] opacity-0"
-                }`}
+                    }`}
             >
                 {normalizedOptions.map((option, index) => {
                     const isSelected = index === selectedIndex
@@ -168,13 +166,12 @@ const CustomSelect = ({
                             aria-disabled={option.disabled || undefined}
                             onClick={() => selectOption(option)}
                             onMouseMove={() => !option.disabled && setActiveIndex(index)}
-                            className={`flex min-h-10 cursor-pointer items-center justify-between gap-3 rounded-md px-3 py-2 text-sm transition-colors duration-100 motion-reduce:transition-none ${
-                                option.disabled
+                            className={`flex min-h-10 cursor-pointer items-center justify-between gap-3 rounded-md px-3 py-2 text-sm transition-colors duration-100 motion-reduce:transition-none ${option.disabled
                                     ? "cursor-not-allowed text-slate-300"
                                     : isActive || isSelected
-                                      ? "bg-sky-50 text-sky-700"
-                                      : "text-slate-700 hover:bg-slate-50"
-                            }`}
+                                        ? "bg-sky-50 text-sky-700"
+                                        : "text-slate-700 hover:bg-slate-50"
+                                }`}
                         >
                             <span className="truncate">{option.label}</span>
                             {isSelected && (

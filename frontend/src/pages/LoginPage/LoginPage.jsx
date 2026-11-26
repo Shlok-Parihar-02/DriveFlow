@@ -45,7 +45,7 @@ const LoginPage = () => {
         } catch (e) {
             console.error("Error occured while creating account", e)
         } finally {
-            navigate("/dashboard")
+            navigate("/driveflow")
         }
     }
 

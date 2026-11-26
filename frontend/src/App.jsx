@@ -1,7 +1,7 @@
 import react from "react"
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import LoginPage from "./pages/LoginPage/LoginPage"
-import Dashboard from "./common/components/Dashboard/Dashboard"
+import DriveFlow from "./common/components/DriveFlowApp/DriveFlow"
 
 const App = () => {
   return <>
@@ -12,8 +12,8 @@ const App = () => {
           element={<LoginPage/>}
         />
         <Route 
-          path="/dashboard"
-          element={<Dashboard/>}
+          path="/driveflow"
+          element={<DriveFlow/>}
         />
       </Routes>
     </BrowserRouter>
